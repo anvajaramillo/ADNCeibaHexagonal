@@ -34,24 +34,32 @@ pipeline {
             url:'https://github.com/anvajaramillo/ADNCeibaHexagonal.git'
           ]]
         ])
-        sh 'chmod +x ./gradlew'
-        sh './gradlew --b ./build.gradle clean'
       }
     }
-
-    stage('Compile') {
-        steps{
-          echo "------------>CompileW<------------"
-          sh './gradlew build'
-          echo "------------>Compile<------------"
-          sh './gradlew --b ./build.gradle compileJava'
-        }
-    } 
 
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-        sh './gradlew --b ./build.gradle test'
+        sh 'chmod +x ./microservicio/gradlew'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        echo "------------>Build<------------"
+        sh 'chmod +x ./microservicio/gradlew'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
+      }
+    }
+
+    stage('Unit Tests') {
+      steps{
+        echo "------------>Unit Tests<------------"
+        sh 'chmod +x ./microservicio/gradlew'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle jacocoTestReport'
       }
     }
 
@@ -59,18 +67,11 @@ pipeline {
         steps{
           echo '------------>Análisis de código estático<------------'
           withSonarQubeEnv('Sonar') {
-          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
       }  
     }
 
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh 'gradle --b ./build.gradle build -x test'
-      }
-    }
-    
   }
 
   post {
@@ -79,7 +80,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'build/test-results/test/*.xml' // -> RUTA DE TUS ARCHIVOS .XML
+      junit '**/test-results/testDebugUnitTest/*.xml'
     }
     failure {
       echo 'This will run only if failed'
