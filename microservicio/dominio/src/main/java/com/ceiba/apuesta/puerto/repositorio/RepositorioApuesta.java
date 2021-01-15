@@ -12,7 +12,7 @@ public interface RepositorioApuesta {
 	
 	boolean existePorId(String idApuesta);
 
-	Boolean validarApuestaParaLaMismaPersona(Long idPartido, Long idApuesta, String cedula);
+	int validarApuestaParaLaMismaPersona(Long idPartido, String cedula);
 
 	int consultarTotalGanadores(Long idPartido, int puntajePais1, int puntajePais2);
 

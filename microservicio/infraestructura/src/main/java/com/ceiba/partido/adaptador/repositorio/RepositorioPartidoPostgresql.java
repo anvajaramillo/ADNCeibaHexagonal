@@ -69,7 +69,7 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	@Override
 	public Boolean validarPartidoFinalizado(Long idPartido) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", idPartido);
+        paramSource.addValue("idPartido", idPartido);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoFinalizado,paramSource, Boolean.class);
 	}
@@ -77,7 +77,7 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	@Override
 	public Boolean validarPartidoIniciado(Long idPartido) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", idPartido);
+        paramSource.addValue("idPartido", idPartido);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciado,paramSource, Boolean.class);
 	}
@@ -85,7 +85,7 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	@Override
 	public Boolean validarApuestaAsignada(Long idPartido) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", idPartido);
+        paramSource.addValue("idPartido", idPartido);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlApuestaAsignada,paramSource, Boolean.class);
 	}

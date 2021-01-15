@@ -67,13 +67,12 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 	}
 
 	@Override
-	public Boolean validarApuestaParaLaMismaPersona(Long idPartido, Long idApuesta, String cedula) {
+	public int validarApuestaParaLaMismaPersona(Long idPartido, String cedula) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
-        paramSource.addValue("idApuesta", idApuesta);
         paramSource.addValue("cedula", cedula);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlValidarMismaPersona,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlValidarMismaPersona,paramSource, int.class);
 	}
 
 	@Override
@@ -101,8 +100,8 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
         paramSource.addValue("excedente", excedente);
-
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlFinalizarApuestas,paramSource, int.class);
+        
+        this.customNamedParameterJdbcTemplate.actualizar(paramSource, sqlFinalizarApuestas);
 	}
 
 }

@@ -7,7 +7,7 @@ import com.ceiba.partido.puerto.repositorio.RepositorioPartido;
 
 public class ServicioActualizarApuesta {
 	
-	private static final String VALIDAR_PARTIDO_INICIADO = "NO SE PUEDE CREAR LA APUESTA PORQUE EL PARTIDO YA INICIï¿½";
+	private static final String VALIDAR_PARTIDO_INICIADO = "NO SE PUEDE CREAR LA APUESTA PORQUE EL PARTIDO YA INICIÓ";
 	private static final String VALIDAR_APUESTAS_PARA_LA_MISMA_PERSONAS = "LA PERSONA YA TIENE CREADA UNA APUESTA PARA ESTE PARTIDO";
 	
 	private final RepositorioApuesta repositorioApuesta;
@@ -20,7 +20,7 @@ public class ServicioActualizarApuesta {
 
 	public void ejecutar(Apuesta apuesta){
 		validarPartidoIniciado(apuesta.getPartido().getIdPartido());
-		validarApuestasParaLaMismaPersona(apuesta.getPartido().getIdPartido(), apuesta.getId(), apuesta.getCedula());
+		validarApuestasParaLaMismaPersona(apuesta.getPartido().getIdPartido(), apuesta.getCedula());
 		this.repositorioApuesta.actualizar(apuesta);
 	}
 	
@@ -31,9 +31,9 @@ public class ServicioActualizarApuesta {
 		}
 	}
 	
-	private void validarApuestasParaLaMismaPersona(Long idPartido, Long idApuesta, String cedula){
-		Boolean apuestaParaLaMismaPersona = this.repositorioApuesta.validarApuestaParaLaMismaPersona(idPartido, idApuesta, cedula);
-		if(Boolean.TRUE.equals(apuestaParaLaMismaPersona)){
+	private void validarApuestasParaLaMismaPersona(Long idPartido, String cedula){
+		int apuestaParaLaMismaPersona = this.repositorioApuesta.validarApuestaParaLaMismaPersona(idPartido, cedula);
+		if(apuestaParaLaMismaPersona > 1){
 			throw new ExcepcionValorInvalido(VALIDAR_APUESTAS_PARA_LA_MISMA_PERSONAS);
 		}
 	}

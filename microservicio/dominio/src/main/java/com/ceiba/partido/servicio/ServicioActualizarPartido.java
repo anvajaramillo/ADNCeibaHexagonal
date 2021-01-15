@@ -7,7 +7,7 @@ import com.ceiba.partido.puerto.repositorio.RepositorioPartido;
 
 public class ServicioActualizarPartido {
 	
-	private static final String VALIDAR_PARTIDO_FINALIZADO = "NO SE PUEDE EDITAR EL PARTIDO PORQUE YA FINALIZï¿½";
+	private static final String VALIDAR_PARTIDO_FINALIZADO = "NO SE PUEDE EDITAR EL PARTIDO PORQUE YA FINALIZÓ";
 	
 	private final RepositorioPartido repositorioPartido;
 	private final RepositorioApuesta repositorioApuesta;

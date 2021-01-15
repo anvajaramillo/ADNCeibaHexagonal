@@ -22,6 +22,7 @@ public class MapeoApuesta implements RowMapper<DtoApuesta>, MapperResult {
 		boolean isGanador = resultSet.getBoolean("is_ganador");
 		int dineroGanado = resultSet.getInt("dinero_ganado");
 		DtoPartido dtoPartido = new MapeoPartido().mapRow(resultSet,rowNum);
+		dtoPartido.setIdPartido(resultSet.getLong("id_partido"));
 		
 		return new DtoApuesta(id,dinero,nombre,cedula,puntajePais1,puntajePais2,isGanador,dineroGanado,dtoPartido);
 	}
