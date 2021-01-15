@@ -7,10 +7,6 @@ import com.ceiba.partido.modelo.dto.DtoPartido;
 
 public interface DaoPartido {
 	
-	/**
-     * Permite listar partidos
-     * @return los partidos
-     */
     List<DtoPartido> listar();
 
 }

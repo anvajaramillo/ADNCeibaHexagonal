@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ceiba.ComandoRespuesta;
 import com.ceiba.partido.comando.ComandoPartido;
 import com.ceiba.partido.comando.manejador.ManejadorActualizarPartido;

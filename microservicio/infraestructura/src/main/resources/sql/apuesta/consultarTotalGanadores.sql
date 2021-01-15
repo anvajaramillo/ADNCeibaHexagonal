@@ -1,0 +1,1 @@
+select count(*) from apuestas where id_partido = :idPartido and puntajepais1 = :puntajePais1 and puntajepais2 = :puntajePais2;

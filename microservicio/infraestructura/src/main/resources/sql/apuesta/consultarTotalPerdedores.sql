@@ -1,0 +1,1 @@
+select coalesce(sum(dinero),0) from apuestas where id_partido = :idPartido and not (puntajepais1 = :puntajePais1 and puntajepais2 = :puntajePais2);

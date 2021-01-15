@@ -12,4 +12,12 @@ public interface RepositorioPartido {
 	
 	boolean existePorId(String idPartido);
 
+	Boolean validarPartidoFinalizado(Long idPartido);
+
+	Boolean validarApuestaAsignada(Long idPartido);
+
+	Boolean validarPartidoIniciado(Long idPartido);
+
+	void finalizarPartido(Partido partido);
+
 }

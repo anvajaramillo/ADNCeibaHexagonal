@@ -1,1 +1,1 @@
-select count(1) from partidos where id=:idPartido;
+select count(*) > 0 from partidos where id=:idPartido;

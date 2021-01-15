@@ -24,7 +24,7 @@ CREATE TABLE apuestas (
 	cedula varchar(20),
 	puntajePais1 int4,
 	puntajePais2 int4,
-	isGanador boolean,
+	is_ganador boolean,
 	dinero_ganado int4,
 	id_partido int4,
 	PRIMARY KEY (id),
