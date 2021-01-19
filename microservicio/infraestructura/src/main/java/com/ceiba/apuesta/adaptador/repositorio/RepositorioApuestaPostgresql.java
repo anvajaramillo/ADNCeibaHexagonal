@@ -36,6 +36,9 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
     @SqlStatement(namespace="apuesta", value="finalizarApuestas") 
     private static String sqlFinalizarApuestas;
     
+    @SqlStatement(namespace="apuesta", value="partidoIniciado") 
+    private static String sqlPartidoIniciado;
+    
     public RepositorioApuestaPostgresql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -96,12 +99,22 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 	}
 
 	@Override
-	public void finalizarApuestas(Long idPartido, int excedente) {
+	public void finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int excedente) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
+        paramSource.addValue("puntajePais1", puntajePais1);
+        paramSource.addValue("puntajePais2", puntajePais2);
         paramSource.addValue("excedente", excedente);
         
         this.customNamedParameterJdbcTemplate.actualizar(paramSource, sqlFinalizarApuestas);
+	}
+
+	@Override
+	public Boolean validarPartidoIniciado(Long idApuesta) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("idApuesta", idApuesta);
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciado,paramSource, Boolean.class);
 	}
 
 }

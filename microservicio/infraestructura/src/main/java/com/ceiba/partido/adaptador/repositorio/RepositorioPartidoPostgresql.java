@@ -1,5 +1,7 @@
 package com.ceiba.partido.adaptador.repositorio;
 
+import java.time.LocalDateTime;
+
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
@@ -24,17 +26,14 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
     @SqlStatement(namespace="partido", value="existePorId") 
     private static String sqlExistePorId;
     
-    @SqlStatement(namespace="partido", value="partidoFinalizado") 
-    private static String sqlPartidoFinalizado;
+    @SqlStatement(namespace="partido", value="finalizarPartido") 
+    private static String sqlFinalizarPartido;
     
-    @SqlStatement(namespace="partido", value="partidoIniciado") 
-    private static String sqlPartidoIniciado;
+    @SqlStatement(namespace="partido", value="partidoExiste") 
+    private static String sqlPartidoExiste;
     
     @SqlStatement(namespace="partido", value="apuestaAsignada") 
     private static String sqlApuestaAsignada;
-    
-    @SqlStatement(namespace="partido", value="finalizarPartido") 
-    private static String sqlFinalizarPartido;
     
     public RepositorioPartidoPostgresql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -67,32 +66,26 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	}
 
 	@Override
-	public Boolean validarPartidoFinalizado(Long idPartido) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idPartido", idPartido);
+	public void finalizarPartido(Partido partido) {
+		this.customNamedParameterJdbcTemplate.actualizar(partido, sqlFinalizarPartido);
+	}
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoFinalizado,paramSource, Boolean.class);
+	@Override
+	public Boolean validarPartidoExiste(String pais1, String pais2, LocalDateTime horaInicio) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("pais1", pais1);
+        paramSource.addValue("pais2", pais2);
+        paramSource.addValue("horaInicio", horaInicio);
+        
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoExiste,paramSource, Boolean.class);
 	}
 	
-	@Override
-	public Boolean validarPartidoIniciado(Long idPartido) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idPartido", idPartido);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciado,paramSource, Boolean.class);
-	}
-
 	@Override
 	public Boolean validarApuestaAsignada(Long idPartido) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlApuestaAsignada,paramSource, Boolean.class);
-	}
-
-	@Override
-	public void finalizarPartido(Partido partido) {
-		this.customNamedParameterJdbcTemplate.actualizar(partido, sqlActualizar);
 	}
 
 }

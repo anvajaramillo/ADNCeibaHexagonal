@@ -22,8 +22,9 @@ public class MapeoPartido implements RowMapper<DtoPartido>, MapperResult {
 		LocalDateTime horaFin = extraerLocalDateTime(resultSet, "hora_fin");
 		int puntajePais1 = resultSet.getInt("puntaje_pais1");
 		int puntajePais2 = resultSet.getInt("puntaje_pais2");
+		Boolean tieneApuestas = resultSet.getBoolean("tiene_apuestas");
 		
-		return new DtoPartido(idPartido,pais1,pais2,horaInicio,horaFin,puntajePais1,puntajePais2);
+		return new DtoPartido(idPartido,pais1,pais2,horaInicio,horaFin,puntajePais1,puntajePais2,tieneApuestas);
 		
 	}
 

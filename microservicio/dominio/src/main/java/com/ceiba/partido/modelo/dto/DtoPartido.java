@@ -17,5 +17,6 @@ public class DtoPartido {
 	private LocalDateTime horaFin;
 	private int puntajePais1;
 	private int puntajePais2;
+	private Boolean tieneApuestas;
 
 }

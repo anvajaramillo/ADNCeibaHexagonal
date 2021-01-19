@@ -9,5 +9,7 @@ public interface DaoApuesta {
     List<DtoApuesta> listar();
     
     List<DtoApuesta> consultarResultados(Long idPartido);
+    
+    DtoApuesta consultarPorId(Long idApuesta);
 
 }

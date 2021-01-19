@@ -1,5 +1,7 @@
 package com.ceiba.partido.puerto.repositorio;
 
+import java.time.LocalDateTime;
+
 import com.ceiba.partido.modelo.entidad.Partido;
 
 public interface RepositorioPartido {
@@ -11,13 +13,11 @@ public interface RepositorioPartido {
 	void eliminar(Long idPartido);
 	
 	boolean existePorId(String idPartido);
-
-	Boolean validarPartidoFinalizado(Long idPartido);
-
+	
 	Boolean validarApuestaAsignada(Long idPartido);
 
-	Boolean validarPartidoIniciado(Long idPartido);
-
 	void finalizarPartido(Partido partido);
+
+	Boolean validarPartidoExiste(String pais1, String pais2, LocalDateTime horaInicio);
 
 }

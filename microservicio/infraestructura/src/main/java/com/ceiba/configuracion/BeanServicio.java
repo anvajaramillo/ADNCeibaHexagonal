@@ -4,6 +4,7 @@ import com.ceiba.apuesta.puerto.repositorio.RepositorioApuesta;
 import com.ceiba.apuesta.servicio.ServicioActualizarApuesta;
 import com.ceiba.apuesta.servicio.ServicioCrearApuesta;
 import com.ceiba.apuesta.servicio.ServicioEliminarApuesta;
+import com.ceiba.partido.puerto.dao.DaoPartido;
 import com.ceiba.partido.puerto.repositorio.RepositorioPartido;
 import com.ceiba.partido.servicio.ServicioActualizarPartido;
 import com.ceiba.partido.servicio.ServicioCrearPartido;
@@ -39,8 +40,8 @@ public class BeanServicio {
     }
     
     @Bean
-    public ServicioActualizarPartido servicioActualizarPartido(RepositorioPartido repositorioPartido, RepositorioApuesta repositorioApuesta){
-    	return new ServicioActualizarPartido(repositorioPartido, repositorioApuesta);
+    public ServicioActualizarPartido servicioActualizarPartido(RepositorioPartido repositorioPartido, RepositorioApuesta repositorioApuesta, DaoPartido daoPartido){
+    	return new ServicioActualizarPartido(repositorioPartido, repositorioApuesta, daoPartido);
     }
     
     @Bean
@@ -49,13 +50,13 @@ public class BeanServicio {
     }
     
     @Bean
-    public ServicioCrearApuesta servicioCrearApuesta(RepositorioApuesta repositorioApuesta, RepositorioPartido repositorioPartido) {
-    	return new ServicioCrearApuesta(repositorioApuesta,repositorioPartido);
+    public ServicioCrearApuesta servicioCrearApuesta(RepositorioApuesta repositorioApuesta) {
+    	return new ServicioCrearApuesta(repositorioApuesta);
     }
     
     @Bean
-    public ServicioActualizarApuesta servicioActualizarApuesta(RepositorioApuesta repositorioApuesta, RepositorioPartido repositorioPartido){
-    	return new ServicioActualizarApuesta(repositorioApuesta,repositorioPartido);
+    public ServicioActualizarApuesta servicioActualizarApuesta(RepositorioApuesta repositorioApuesta){
+    	return new ServicioActualizarApuesta(repositorioApuesta);
     }
     
     @Bean
