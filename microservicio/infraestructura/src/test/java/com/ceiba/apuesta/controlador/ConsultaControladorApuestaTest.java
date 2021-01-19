@@ -67,5 +67,44 @@ public class ConsultaControladorApuestaTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").doesNotExist());
     }
+    
+  @Test
+  public void consultarResultadosFinalizados() throws Exception {
+      // arrange
+  	Long idPartido = 1L;
+  	LocalDateTime horaInicio = LocalDateTime.now();
+	    String stringFechaFin = "3000-01-01 00:00:00";
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	    LocalDateTime horaFin = LocalDateTime.parse(stringFechaFin, formatter);
+      ComandoPartido partido = unPartidoBuilder()
+      						.conIdPartido(idPartido)
+      						.conHoraInicio(horaInicio)
+      						.build(); 
+  	
+      // act - assert
+      mocMvc.perform(put("/partidos/{id}",idPartido)
+              .contentType(MediaType.APPLICATION_JSON)
+              .content(objectMapper.writeValueAsString(partido)))
+              .andExpect(status().isOk());
+      
+      partido = unPartidoBuilder()
+      		.conIdPartido(idPartido)
+				.conHoraFin(horaFin)
+				.conPuntajePais1(1)
+				.conPuntajePais2(2)
+				.build(); 
+      
+      mocMvc.perform(put("/partidos/{id}",idPartido)
+              .contentType(MediaType.APPLICATION_JSON)
+              .content(objectMapper.writeValueAsString(partido)))
+              .andExpect(status().isOk());
+      
+      mocMvc.perform(get("/apuestas/consultarResultados/{id}", idPartido)
+              .contentType(MediaType.APPLICATION_JSON))
+              .andExpect(status().isOk())
+              .andExpect(jsonPath("$[0].nombre", is("Angie Jaramillo")))
+      		.andExpect(jsonPath("$[0].dineroGanado", is(100000)))
+      		.andExpect(jsonPath("$[0].ganador", is(true)));
+  }
 
 }
