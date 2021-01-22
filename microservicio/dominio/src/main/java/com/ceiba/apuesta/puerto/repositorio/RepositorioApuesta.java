@@ -20,7 +20,7 @@ public interface RepositorioApuesta {
 
 	int consultarTotalDineroPerderores(Long idPartido, int puntajePais1, int puntajePais2);
 
-	void finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int calcularExcedente);
+	int finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int calcularExcedente);
 
 	Boolean validarPartidoIniciado(Long idPartido);
 	

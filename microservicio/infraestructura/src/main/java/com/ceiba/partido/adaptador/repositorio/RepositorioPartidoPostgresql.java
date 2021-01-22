@@ -45,8 +45,8 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	}
 
 	@Override
-	public void actualizar(Partido partido) {
-		this.customNamedParameterJdbcTemplate.actualizar(partido, sqlActualizar);
+	public int actualizar(Partido partido) {
+		return this.customNamedParameterJdbcTemplate.actualizar(partido, sqlActualizar);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	}
 
 	@Override
-	public void finalizarPartido(Partido partido) {
-		this.customNamedParameterJdbcTemplate.actualizar(partido, sqlFinalizarPartido);
+	public int finalizarPartido(Partido partido) {
+		return this.customNamedParameterJdbcTemplate.actualizar(partido, sqlFinalizarPartido);
 	}
 
 	@Override

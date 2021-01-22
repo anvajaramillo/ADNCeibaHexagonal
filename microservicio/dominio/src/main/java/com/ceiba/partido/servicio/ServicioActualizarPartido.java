@@ -23,17 +23,19 @@ public class ServicioActualizarPartido {
 		this.daoPartido = daoPartido;
 	}
 
-	public void ejecutar(Partido partido){
+	public int ejecutar(Partido partido){
 		DtoPartido partidoAntiguo = this.daoPartido.consultarPorId(partido.getIdPartido());
+		int ejecutar = 0;
 		if(Boolean.TRUE.equals(partidoAntiguo.getTieneApuestas()) || Boolean.TRUE.equals(validarPartidoIniciado(partidoAntiguo))){
 			validarPartidoFinalizado(partidoAntiguo);
-			this.repositorioPartido.finalizarPartido(partido);
+			ejecutar = this.repositorioPartido.finalizarPartido(partido);
 			if(Boolean.TRUE.equals(partidoAntiguo.getTieneApuestas())){
-				this.repositorioApuesta.finalizarApuestas(partido.getIdPartido(),partido.getPuntajePais1(),partido.getPuntajePais2(),calcularExcedente(partido));
+				ejecutar = this.repositorioApuesta.finalizarApuestas(partido.getIdPartido(),partido.getPuntajePais1(),partido.getPuntajePais2(),calcularExcedente(partido));
 			}
 		}else{
-			this.repositorioPartido.actualizar(partido);
+			ejecutar = this.repositorioPartido.actualizar(partido);
 		}
+		return ejecutar;
 	}
 
 	private void validarPartidoFinalizado(DtoPartido partido){

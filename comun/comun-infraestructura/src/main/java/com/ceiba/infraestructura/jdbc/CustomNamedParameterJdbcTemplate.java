@@ -28,13 +28,13 @@ public class CustomNamedParameterJdbcTemplate {
 		return keyHolder.getKey().longValue();
 	}
 	
-	public void actualizar(Object object,String sql) {
+	public int actualizar(Object object,String sql) {
 		MapSqlParameterSource paramSource = crearParametros(object);
-		this.namedParameterJdbcTemplate.update(sql, paramSource);
+		return this.namedParameterJdbcTemplate.update(sql, paramSource);
 	}
 	
-	public void actualizar(MapSqlParameterSource paramSource, String sql) {
-		this.namedParameterJdbcTemplate.update(sql, paramSource);
+	public int actualizar(MapSqlParameterSource paramSource, String sql) {
+		return this.namedParameterJdbcTemplate.update(sql, paramSource);
 	}
 	
 	private MapSqlParameterSource crearParametros(Object object) {

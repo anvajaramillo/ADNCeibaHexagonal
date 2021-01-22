@@ -8,7 +8,7 @@ public interface RepositorioPartido {
 	
 	Long crear(Partido partido);
 	
-	void actualizar(Partido partido);
+	int actualizar(Partido partido);
 	
 	void eliminar(Long idPartido);
 	
@@ -16,7 +16,7 @@ public interface RepositorioPartido {
 	
 	Boolean validarApuestaAsignada(Long idPartido);
 
-	void finalizarPartido(Partido partido);
+	int finalizarPartido(Partido partido);
 
 	Boolean validarPartidoExiste(String pais1, String pais2, LocalDateTime horaInicio);
 

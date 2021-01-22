@@ -106,16 +106,16 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarTotalPerdedores,paramSource, int.class);
 	}
-
+	
 	@Override
-	public void finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int excedente) {
+	public int finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int excedente) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
         paramSource.addValue("puntajePais1", puntajePais1);
         paramSource.addValue("puntajePais2", puntajePais2);
         paramSource.addValue("excedente", excedente);
-        
-        this.customNamedParameterJdbcTemplate.actualizar(paramSource, sqlFinalizarApuestas);
+      
+        return this.customNamedParameterJdbcTemplate.actualizar(paramSource, sqlFinalizarApuestas);
 	}
 
 	@Override
