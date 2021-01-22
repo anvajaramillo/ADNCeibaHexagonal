@@ -1,6 +1,7 @@
 package com.ceiba.apuesta.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.ceiba.apuesta.comando.manejador.ManejadorEliminarApuesta;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin({"http://localhost:4200"})
 @RestController
 @RequestMapping("/apuestas")
 @Api(tags = { "Controlador comando apuesta"})

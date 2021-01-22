@@ -19,7 +19,7 @@ public class ServicioEliminarApuesta {
 	}
 	
 	private void validarPartidoIniciado(Long idApuesta){
-		Boolean partidoIniciado = this.repositorioApuesta.validarPartidoIniciado(idApuesta);
+		Boolean partidoIniciado = this.repositorioApuesta.validarPartidoIniciadoPorApuesta(idApuesta);
 		if(Boolean.TRUE.equals(partidoIniciado)){
 			throw new ExcepcionValorInvalido(VALIDAR_PARTIDO_INICIADO);
 		}

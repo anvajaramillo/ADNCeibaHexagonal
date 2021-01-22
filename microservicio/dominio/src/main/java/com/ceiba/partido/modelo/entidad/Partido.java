@@ -2,8 +2,11 @@ package com.ceiba.partido.modelo.entidad;
 
 import java.time.LocalDateTime;
 import lombok.Getter;
+import lombok.Setter;
+
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
+@Setter
 @Getter
 public class Partido {
 	

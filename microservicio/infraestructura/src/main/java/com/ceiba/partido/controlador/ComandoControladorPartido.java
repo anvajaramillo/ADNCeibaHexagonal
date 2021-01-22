@@ -1,6 +1,7 @@
 package com.ceiba.partido.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.ceiba.partido.comando.manejador.ManejadorEliminarPartido;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/partidos")
 @Api(tags = { "Controlador comando usuario"})
@@ -41,6 +43,7 @@ public class ComandoControladorPartido {
 	@PutMapping(value="/{idPartido}")
 	@ApiOperation("Actualizar Partido")
 	public void actualizar(@RequestBody ComandoPartido comandoPartido,@PathVariable Long idPartido) {
+		System.out.println("Actualizar Partido");
 		comandoPartido.setIdPartido(idPartido);
 		manejadorActualizarPartido.ejecutar(comandoPartido);
 	}
@@ -48,6 +51,7 @@ public class ComandoControladorPartido {
     @DeleteMapping(value="/{idPartido}")
 	@ApiOperation("Eliminar Partido")
 	public void eliminar(@PathVariable Long idPartido) {
+    	System.out.println("Eliminar Partido");
     	manejadorEliminarPartido.ejecutar(idPartido);
 	}
 

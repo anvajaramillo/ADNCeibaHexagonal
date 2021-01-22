@@ -2,9 +2,11 @@ package com.ceiba.apuesta.modelo.entidad;
 
 import com.ceiba.partido.modelo.entidad.Partido;
 import lombok.Getter;
+import lombok.Setter;
+
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
-
+@Setter
 @Getter
 public class Apuesta {
 	

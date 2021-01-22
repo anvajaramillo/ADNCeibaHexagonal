@@ -1,5 +1,8 @@
 package com.ceiba.apuesta.adaptador.repositorio;
 
+import java.time.LocalDateTime;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import com.ceiba.apuesta.modelo.entidad.Apuesta;
@@ -38,6 +41,12 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
     
     @SqlStatement(namespace="apuesta", value="partidoIniciado") 
     private static String sqlPartidoIniciado;
+    
+    @SqlStatement(namespace="apuesta", value="partidoIniciadoPorIdApuesta") 
+    private static String sqlPartidoIniciadoPorIdApuesta;
+    
+    @SqlStatement(namespace="apuesta", value="partidoExiste") 
+    private static String sqlPartidoExiste;
     
     public RepositorioApuestaPostgresql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -110,11 +119,34 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 	}
 
 	@Override
-	public Boolean validarPartidoIniciado(Long idApuesta) {
+	public Boolean validarPartidoIniciado(Long idPartido) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("idPartido", idPartido);
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciado,paramSource, Boolean.class);
+	}
+
+	@Override
+	public Long validarPartidoExiste(String pais1, String pais2, LocalDateTime horaInicio) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("pais1", pais1);
+        paramSource.addValue("pais2", pais2);
+        paramSource.addValue("horaInicio", horaInicio);
+        
+        try {
+        	return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoExiste,paramSource, Long.class);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        } 
+        
+	}
+
+	@Override
+	public Boolean validarPartidoIniciadoPorApuesta(Long idApuesta) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idApuesta", idApuesta);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciado,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlPartidoIniciadoPorIdApuesta,paramSource, Boolean.class);
 	}
 
 }

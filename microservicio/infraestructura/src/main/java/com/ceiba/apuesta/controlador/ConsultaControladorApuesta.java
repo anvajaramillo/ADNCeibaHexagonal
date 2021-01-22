@@ -1,6 +1,8 @@
 package com.ceiba.apuesta.controlador;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import com.ceiba.apuesta.modelo.dto.DtoApuesta;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin({"http://localhost:4200"})
 @RestController
 @RequestMapping("/apuestas")
 @Api(tags={"Controlador consulta apuestas"})
@@ -37,6 +40,7 @@ public class ConsultaControladorApuesta {
 	@GetMapping(value="/consultarResultados/{idPartido}")
     @ApiOperation("Consultar Resultados Apuestas")
     public List<DtoApuesta> consultarResultados(@PathVariable Long idPartido) {
+		System.out.println("Consultar Resultados Apuestas");
         return this.manejadorConsultarResultados.ejecutar(idPartido);
     }
 	

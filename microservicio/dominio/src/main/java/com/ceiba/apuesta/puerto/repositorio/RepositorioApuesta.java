@@ -1,5 +1,7 @@
 package com.ceiba.apuesta.puerto.repositorio;
 
+import java.time.LocalDateTime;
+
 import com.ceiba.apuesta.modelo.entidad.Apuesta;
 
 public interface RepositorioApuesta {
@@ -20,6 +22,10 @@ public interface RepositorioApuesta {
 
 	void finalizarApuestas(Long idPartido, int puntajePais1, int puntajePais2, int calcularExcedente);
 
-	Boolean validarPartidoIniciado(Long idApuesta);
+	Boolean validarPartidoIniciado(Long idPartido);
+	
+	Boolean validarPartidoIniciadoPorApuesta(Long idApuesta);
+
+	Long validarPartidoExiste(String pais1, String pais2, LocalDateTime horaInicio);
 	
 }

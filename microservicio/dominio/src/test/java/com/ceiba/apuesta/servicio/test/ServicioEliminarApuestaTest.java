@@ -31,7 +31,7 @@ public class ServicioEliminarApuestaTest {
 		
 		RepositorioApuesta repositorioApuesta = Mockito.mock(RepositorioApuesta.class);
 		
-		Mockito.when(repositorioApuesta.validarPartidoIniciado(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioApuesta.validarPartidoIniciadoPorApuesta(Mockito.anyLong())).thenReturn(true);
 		ServicioEliminarApuesta servicioEliminarApuesta = new ServicioEliminarApuesta(repositorioApuesta);
 		
 		BasePrueba.assertThrows(() -> servicioEliminarApuesta.ejecutar(apuesta.getId()), ExcepcionValorInvalido.class,"NO SE PUEDE ACTUALIZAR LA APUESTA PORQUE EL PARTIDO YA INICIÓ");
