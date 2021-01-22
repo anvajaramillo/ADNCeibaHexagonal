@@ -53,13 +53,13 @@ public class ComandoControladorApuestaTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(apuesta)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 3}"));
+                .andExpect(content().json("{'valor': 2}"));
     }
     
     @Test
     public void Actualizar() throws Exception{
     	// arrange
-    	Long idApuesta = 2L;
+    	Long idApuesta = 3L;
     	
     	
     	ComandoPartido partido = unPartidoBuilder()
@@ -77,7 +77,7 @@ public class ComandoControladorApuestaTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(apuesta)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 2}"));
+                .andExpect(content().json("{'valor': 3}"));
     	
     	mocMvc.perform(put("/apuestas/{id}",idApuesta)
                 .contentType(MediaType.APPLICATION_JSON)
