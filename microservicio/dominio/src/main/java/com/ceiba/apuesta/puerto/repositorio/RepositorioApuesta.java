@@ -10,9 +10,7 @@ public interface RepositorioApuesta {
 	
 	int actualizar(Apuesta apuesta);
 	
-	void eliminar(Long idApuesta);
-	
-	boolean existePorId(String idApuesta);
+	int eliminar(Long idApuesta);
 
 	int validarApuestaParaLaMismaPersona(Long idPartido, String cedula);
 

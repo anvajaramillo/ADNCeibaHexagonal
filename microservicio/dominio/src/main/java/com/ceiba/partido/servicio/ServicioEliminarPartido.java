@@ -13,9 +13,9 @@ public class ServicioEliminarPartido {
 		this.repositorioPartido = repositorioPartido;
 	}
 	
-	public void ejecutar(Long idPartido){
+	public int ejecutar(Long idPartido){
 		validarApuestaAsignada(idPartido);
-		this.repositorioPartido.eliminar(idPartido);
+		return this.repositorioPartido.eliminar(idPartido);
 	}
 	
 	private void validarApuestaAsignada(Long idPartido){

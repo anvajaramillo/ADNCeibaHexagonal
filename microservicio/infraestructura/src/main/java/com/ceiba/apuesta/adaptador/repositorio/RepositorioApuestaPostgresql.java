@@ -23,9 +23,6 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 
     @SqlStatement(namespace="apuesta", value="eliminar")
     private static String sqlEliminar;
-
-    @SqlStatement(namespace="apuesta", value="existePorId") 
-    private static String sqlExistePorId;
     
     @SqlStatement(namespace="apuesta", value="validarMismaPersona") 
     private static String sqlValidarMismaPersona;
@@ -63,19 +60,11 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 	}
 
 	@Override
-	public void eliminar(Long idApuesta) {
+	public int eliminar(Long idApuesta) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idApuesta", idApuesta);
 
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
-	}
-
-	@Override
-	public boolean existePorId(String idApuesta) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idApuesta", idApuesta);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorId,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override

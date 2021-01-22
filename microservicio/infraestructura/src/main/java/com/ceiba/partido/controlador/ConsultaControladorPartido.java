@@ -1,20 +1,16 @@
 package com.ceiba.partido.controlador;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ceiba.partido.consulta.ManejadorConsultarPartido;
 import com.ceiba.partido.consulta.ManejadorListarPartidos;
 import com.ceiba.partido.modelo.dto.DtoPartido;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/partidos")
 @Api(tags={"Controlador consulta partidos"})

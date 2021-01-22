@@ -38,7 +38,7 @@ public class ComandoControladorApuestaTest {
     private MockMvc mocMvc;
     
     @Test
-    public void test1Crear() throws Exception{
+    public void Crear() throws Exception{
     	// arrang
     	ComandoPartido partido = unPartidoBuilder()
     							.conIdPartido(1L)
@@ -57,7 +57,7 @@ public class ComandoControladorApuestaTest {
     }
     
     @Test
-    public void test2Actualizar() throws Exception{
+    public void Actualizar() throws Exception{
     	// arrange
     	Long idApuesta = 2L;
     	
@@ -93,7 +93,7 @@ public class ComandoControladorApuestaTest {
     }
     
     @Test
-    public void test3Eliminar() throws Exception{
+    public void Eliminar() throws Exception{
     	// arrange
     	Long id = 2L;
     	

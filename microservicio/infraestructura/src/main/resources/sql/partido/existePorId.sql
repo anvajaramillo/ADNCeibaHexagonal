@@ -1,1 +1,0 @@
-select count(*) > 0 from partidos where id=:idPartido;

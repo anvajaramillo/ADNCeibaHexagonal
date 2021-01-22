@@ -151,7 +151,7 @@ public class ServicioActualizarPartidoTest {
 		LocalDateTime horaFin = LocalDateTime.now();
 		int puntajePais1 = 3;
 		int puntajePais2 = 1;
-		int actualizar = 1;
+		int excendente = 0;
 		
 		Partido partido = unPartidoBuilder()
 						  .conIdPartido(1L)
@@ -166,10 +166,36 @@ public class ServicioActualizarPartidoTest {
 		Mockito.when(repositorioPartido.finalizarPartido(partido)).thenReturn(0);
 		Mockito.when(repositorioApuesta.consultarTotalGanadores(Mockito.anyLong(),Mockito.anyInt(),Mockito.anyInt())).thenReturn(0);
 		Mockito.when(repositorioApuesta.consultarTotalDineroPerderores(Mockito.anyLong(),Mockito.anyInt(),Mockito.anyInt())).thenReturn(100);
-		Mockito.when(repositorioApuesta.finalizarApuestas(Mockito.anyLong(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt())).thenReturn(1);
 		ServicioActualizarPartido servicioActualizarPartido = new ServicioActualizarPartido(repositorioPartido,repositorioApuesta,daoPartido);
 
-		assertEquals(actualizar,servicioActualizarPartido.ejecutar(partido));
+		assertEquals(excendente,servicioActualizarPartido.calcularExcedente(partido));
+
+	}
+	
+	@Test
+	public void validarFinalizarPartidosConApuestaConGanadores(){
+		
+		LocalDateTime horaFin = LocalDateTime.now();
+		int puntajePais1 = 3;
+		int puntajePais2 = 1;
+		int excendente = 50;
+		
+		Partido partido = unPartidoBuilder()
+						  .conIdPartido(1L)
+						  .conHoraFin(horaFin)
+						  .conPuntajePais1(puntajePais1)
+						  .conPuntajePais2(puntajePais2)
+						  .build();
+		RepositorioPartido repositorioPartido = Mockito.mock(RepositorioPartido.class);
+		RepositorioApuesta repositorioApuesta = Mockito.mock(RepositorioApuesta.class);
+		DaoPartido daoPartido = Mockito.mock(DaoPartido.class);
+		Mockito.when(daoPartido.consultarPorId(Mockito.anyLong())).thenReturn(new DtoPartido(1L,"Colombia","Costa Rica",LocalDateTime.MIN,null,1,2,true));
+		Mockito.when(repositorioPartido.finalizarPartido(partido)).thenReturn(0);
+		Mockito.when(repositorioApuesta.consultarTotalGanadores(Mockito.anyLong(),Mockito.anyInt(),Mockito.anyInt())).thenReturn(2);
+		Mockito.when(repositorioApuesta.consultarTotalDineroPerderores(Mockito.anyLong(),Mockito.anyInt(),Mockito.anyInt())).thenReturn(100);
+		ServicioActualizarPartido servicioActualizarPartido = new ServicioActualizarPartido(repositorioPartido,repositorioApuesta,daoPartido);
+
+		assertEquals(excendente,servicioActualizarPartido.calcularExcedente(partido));
 
 	}
 

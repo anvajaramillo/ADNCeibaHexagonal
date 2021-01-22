@@ -1,13 +1,10 @@
 package com.ceiba.apuesta.controlador;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ceiba.apuesta.consulta.ManejadorConsultarApuesta;
 import com.ceiba.apuesta.consulta.ManejadorConsultarResultados;
 import com.ceiba.apuesta.consulta.ManejadorListarApuesta;
@@ -15,7 +12,6 @@ import com.ceiba.apuesta.modelo.dto.DtoApuesta;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/apuestas")
 @Api(tags={"Controlador consulta apuestas"})

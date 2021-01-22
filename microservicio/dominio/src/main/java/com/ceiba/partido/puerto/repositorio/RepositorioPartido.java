@@ -10,9 +10,7 @@ public interface RepositorioPartido {
 	
 	int actualizar(Partido partido);
 	
-	void eliminar(Long idPartido);
-	
-	boolean existePorId(String idPartido);
+	int eliminar(Long idPartido);
 	
 	Boolean validarApuestaAsignada(Long idPartido);
 

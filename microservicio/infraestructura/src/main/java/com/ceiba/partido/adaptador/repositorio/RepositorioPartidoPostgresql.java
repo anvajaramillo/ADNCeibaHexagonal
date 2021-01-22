@@ -22,9 +22,6 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 
     @SqlStatement(namespace="partido", value="eliminar")
     private static String sqlEliminar;
-
-    @SqlStatement(namespace="partido", value="existePorId") 
-    private static String sqlExistePorId;
     
     @SqlStatement(namespace="partido", value="finalizarPartido") 
     private static String sqlFinalizarPartido;
@@ -50,19 +47,11 @@ public class RepositorioPartidoPostgresql implements RepositorioPartido{
 	}
 
 	@Override
-	public void eliminar(Long idPartido) {
+	public int eliminar(Long idPartido) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPartido", idPartido);
 
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
-	}
-
-	@Override
-	public boolean existePorId(String idPartido) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", idPartido);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorId,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override

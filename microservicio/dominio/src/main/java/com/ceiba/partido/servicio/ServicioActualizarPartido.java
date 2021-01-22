@@ -56,7 +56,7 @@ public class ServicioActualizarPartido {
 		return this.repositorioApuesta.consultarTotalDineroPerderores(partido.getIdPartido(), partido.getPuntajePais1(), partido.getPuntajePais2());
 	}
 	
-	private int calcularExcedente(Partido partido){
+	public int calcularExcedente(Partido partido){
 		int totalGanadores = consultarTotalGanadores(partido);
 		int totalDineroPerdedores = consultarTotalDineroPerdedores(partido);
 		return (totalGanadores != 0) ? totalDineroPerdedores / totalGanadores : 0;
