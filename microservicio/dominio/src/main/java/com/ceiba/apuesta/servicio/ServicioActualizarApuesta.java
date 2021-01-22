@@ -17,13 +17,13 @@ public class ServicioActualizarApuesta {
 		this.repositorioApuesta = repositorioApuesta;
 	}
 
-	public void ejecutar(Apuesta apuesta){
+	public int ejecutar(Apuesta apuesta){
 		Long idPartido = validarPartidoExiste(apuesta.getPartido());
 		validarPartidoIniciado(idPartido);
 		validarApuestasParaLaMismaPersona(idPartido, apuesta.getCedula());
 		apuesta.setIdPartido(idPartido);
 		apuesta.getPartido().setIdPartido(idPartido);
-		this.repositorioApuesta.actualizar(apuesta);
+		return this.repositorioApuesta.actualizar(apuesta);
 	}
 	
 	private void validarPartidoIniciado(Long idPartido){

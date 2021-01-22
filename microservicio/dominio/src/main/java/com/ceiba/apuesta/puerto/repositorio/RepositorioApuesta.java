@@ -8,7 +8,7 @@ public interface RepositorioApuesta {
 
 	Long crear(Apuesta apuesta);
 	
-	void actualizar(Apuesta apuesta);
+	int actualizar(Apuesta apuesta);
 	
 	void eliminar(Long idApuesta);
 	

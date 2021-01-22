@@ -58,8 +58,8 @@ public class RepositorioApuestaPostgresql implements RepositorioApuesta {
 	}
 
 	@Override
-	public void actualizar(Apuesta apuesta) {
-		this.customNamedParameterJdbcTemplate.actualizar(apuesta, sqlActualizar);
+	public int actualizar(Apuesta apuesta) {
+		return this.customNamedParameterJdbcTemplate.actualizar(apuesta, sqlActualizar);
 	}
 
 	@Override
