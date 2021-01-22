@@ -16,8 +16,8 @@ public class ComandoPartidoTestDataBuilder {
 	
 	public ComandoPartidoTestDataBuilder(){
 		pais1 = "Colombia";
-	    pais2 = "Costa Rica";
-	    String fecha = "3000-01-01 00:00:00";
+	    pais2 = "Venezuela";
+	    String fecha = "3020-01-01 00:00:00";
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	    LocalDateTime dateTime = LocalDateTime.parse(fecha, formatter);
 	    horaInicio = dateTime;

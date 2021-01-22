@@ -17,7 +17,7 @@ import com.ceiba.apuesta.comando.manejador.ManejadorEliminarApuesta;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin({"http://localhost:4200"})
+@CrossOrigin
 @RestController
 @RequestMapping("/apuestas")
 @Api(tags = { "Controlador comando apuesta"})

@@ -43,7 +43,6 @@ public class ComandoControladorPartido {
 	@PutMapping(value="/{idPartido}")
 	@ApiOperation("Actualizar Partido")
 	public void actualizar(@RequestBody ComandoPartido comandoPartido,@PathVariable Long idPartido) {
-		System.out.println("Actualizar Partido");
 		comandoPartido.setIdPartido(idPartido);
 		manejadorActualizarPartido.ejecutar(comandoPartido);
 	}
@@ -51,7 +50,6 @@ public class ComandoControladorPartido {
     @DeleteMapping(value="/{idPartido}")
 	@ApiOperation("Eliminar Partido")
 	public void eliminar(@PathVariable Long idPartido) {
-    	System.out.println("Eliminar Partido");
     	manejadorEliminarPartido.ejecutar(idPartido);
 	}
 

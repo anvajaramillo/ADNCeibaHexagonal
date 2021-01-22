@@ -40,6 +40,8 @@ public class ComandoControladorPartidoTest {
     public void crear() throws Exception{
         // arrange
         ComandoPartido partido = unPartidoBuilder()
+        						.conPais1("Chile")
+        						.conPais2("Ecuador")
         						.build();
 
         // act - assert
